@@ -4,6 +4,17 @@
   --primary-color: #32b6e6;
 }
 
+.color-1{
+  color: #32b6e6;
+}
+.bg-1{
+  background-color: #32b6e6;
+}
+
+.color{
+  background-color: #181818;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,6 +34,16 @@
 
 .font-60 {
   font-size: 60px;
+}
+
+.p-130{
+  padding: 130px 0 130px 0;
+}
+.p-110{
+  padding: 110px 0 110px 0;
+}
+.pb-110{
+  padding-bottom: 110px;
 }
 
 .nav-bar {
@@ -82,7 +103,40 @@
 }
 
 @media screen and (max-width: 768px) {
-  .main-img{
-    background-size: contain;
-  }
-} 
+  
+}
+
+.about-section{
+  background-image: url('/images/model-2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+
+
+/* GET-SHAP-SECTION */
+
+
+.fit{
+  max-width:100%;
+  height: 100%;
+}
+
+.fit img{
+  object-fit: cover;
+  object-position: left;
+  width: 100%;
+  height: 100%;
+}
+
+.black-btn{
+  cursor: pointer;
+  transition: 0.3s all linear;
+  background-color: #000000;
+}
+.black-btn:hover{
+  background-color: rgb(54, 52, 52);
+}
+

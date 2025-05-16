@@ -5,7 +5,7 @@ const Mainbanner = () => {
   return (
     <section>
       <Header/>
-      <div className="main-img position-absolute top-0">
+      <div className="main-img ">
         <div className="container">
           <div className="row">
             <div className="col-7">
