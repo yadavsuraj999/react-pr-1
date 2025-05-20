@@ -29,6 +29,7 @@ const Get_shap = () => {
             </div>
         </div>
         <Progarm fit={fitness.heading} para={fitness.para}/>
+    
     </section>
   )
 }
