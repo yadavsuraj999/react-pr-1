@@ -9,6 +9,7 @@
 }
 .bg-1{
   background-color: #32b6e6;
+  
 }
 
 .color{
@@ -166,9 +167,11 @@
 
 /* spa section */
 
+.img-zoom img{
+  transition: 0.3s all linear;
+}
 
 .scale:hover .img-zoom img{
-  transition: 0.3s all linear;
   transform: scale(1.1);
 }
 
@@ -178,4 +181,25 @@
 
 .small{
   font-size: 14px;
+}
+
+.p-100{
+  padding: 100px;
+}
+
+.fs-20{
+  font-size: 20px;
+}
+
+.minus{
+  font-size: 14px;
+}
+
+.btn-1{
+  cursor: pointer;
+  transition: 0.2s all linear;
+}
+
+.btn-1:hover{
+  background-color: #32b6e6c0;
 }

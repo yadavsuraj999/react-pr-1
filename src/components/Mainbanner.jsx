@@ -4,7 +4,6 @@ import Header from "./Header"
 const Mainbanner = () => {
   return (
     <section>
-      <Header/>
       <div className="main-img ">
         <div className="container">
           <div className="row">

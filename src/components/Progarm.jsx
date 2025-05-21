@@ -3,10 +3,7 @@
  
 
 
-//   let effective =   {
-//         heading:"EFFECTIVE MEMBERSHIP",
-//         para:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the when an unknown printer took a galley of type scrambled it to make a type specimen book."
-// }
+
 
 
 
@@ -16,16 +13,16 @@ const Progarm = (props) => {
         <div className="container">
             <div className="row p-110 align-items-center">
                 <div className="col-lg-6 col-12 ">
-                    <div>
-                        <h2 className="display-5 main-heading fw-bold text-center w-75">
-                            {props.heading} {props.fit} {props.about} {props.meet}
+                    <div className="">
+                        <h2 className="display-5 main-heading fw-bold w-75">
+                            {props.heading} {props.fit} {props.about} {props.meet} {props.effect}
                         </h2>
                     </div>
                 </div>
-                <div className="col-lg-6 col-12">
+                <div className="col-lg-6 col-12 ">
                     <div>
                         <p className=" text-secondary">
-                            {props.head} {props.para} {props.aboutpara} {props.meetpara}
+                            {props.head} {props.para} {props.aboutpara} {props.meetpara} {props.effectpara}
                         </p>
                     </div>
                 </div>

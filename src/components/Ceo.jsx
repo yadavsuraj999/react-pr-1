@@ -23,11 +23,11 @@ const Ceo = () => {
         },
     ]
   return (
-    <section className="bg-black">
+    <section className="bg-black pb-110">
         <div className="container">
             <div className="row">
                 {ceos.map((items)=>{
-                   return <div className="col-3">
+                   return <div className="col-lg-3 col-md-6 col-12">
                     <div>
                         <div>
                             <img src={items.ceo} alt="" width="100%"/>
