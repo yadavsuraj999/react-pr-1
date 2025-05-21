@@ -35,12 +35,12 @@ const Classes2 = () => {
               <div className="col-lg-6 col-12">
                 <div className="color">
                   <div className="row">
-                    <div className="col-7  ">
+                    <div className="col-md-7  col-12">
                       <div className="fit">
                         <img src={item.image} alt="" />
                       </div>
                     </div>
-                    <div className="col-5  p-0 ">
+                    <div className="col-md-5 col-12 p-0 ">
                       <div className="py-5 my-5 px-4 ">
                         <h6 className="color-1">{item.head}</h6>
                         <p className=" text-secondary ">
