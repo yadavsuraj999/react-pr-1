@@ -66,16 +66,18 @@ const Footer = () => {
             </div>
             <div className=" border-top border-secondary py-4">
                 <div className="container">
-                    <div className="row gy-4">
-                        <div className="col-lg-6 col-12">
-                            <div>
+                    <div className="row gy-4 align-items-center">
+                        <div className="col-sm-6 col-12">
+                            <div className="">
                                 <img src="/images/logo.png" alt="" />
                             </div>
                         </div>
-                        <div className="col-lg-6 col-12">
-                            <p className="m-0 text-secondary">
-                                © 2016 LeadGen is proudly powered by ThemeZaa.
-                            </p>
+                        <div className="col-sm-6 col-12">
+                            <div className=" d-flex align-items-center justify-content-end">
+                                <p className="m-0 text-secondary">
+                                    © 2016 LeadGen is proudly powered by ThemeZaa.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

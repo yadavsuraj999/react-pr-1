@@ -40,7 +40,7 @@ const Ceo = () => {
                                 {items.para}
                             </p>
                         </div>
-                        <div className="d-flex gap-4 text-white justify-content-center pb-3 ">
+                        <div className="d-flex gap-4 text-white justify-content-center pb-3 ceo">
                             <span><i class="bi bi-facebook"></i></span>
                             <span><i class="bi bi-twitter"></i></span>
                             <span><i class="bi bi-linkedin"></i></span>

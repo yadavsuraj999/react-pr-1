@@ -42,7 +42,7 @@ const Winter = (props) => {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br /> Lorem Ipsum has been the industry's standard dummy text.
                         </p>
                         <div className=" d-flex justify-content-center align-items-center mt-5">
-                            <button className="fs-6 fw-semibold py-2 px-3 rounded-5 border-0 bg-1 d-flex justify-content-center align-items-center btn-1  gap-2"   >
+                            <button className="fs-6 read-btn fw-semibold py-2 px-3 rounded-5 border-0 bg-1 d-flex justify-content-center align-items-center btn-1  gap-2"   >
                                 <span>JOIN PROGRAM</span> <span className="fw-bold"><i class="bi bi-arrow-right fw-bold fs-4"></i></span></button>
                         </div>
                     </div>

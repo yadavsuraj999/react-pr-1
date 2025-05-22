@@ -56,13 +56,18 @@
   font-weight: 600;
   position: relative;
   cursor: pointer;
+  transition: 0.4s all linear;
+}
+
+.nav-menu li:hover{
+  color:#32b6e6;
 }
 
 .nav-menu li::after {
   content: '';
   position: absolute;
   width: 0;
-  border: 1px solid rgb(229, 229, 231);
+  border: 1px solid #32b6e6;
   bottom: -3px;
   right: 0;
   visibility: hidden;
@@ -201,5 +206,45 @@
 }
 
 .btn-1:hover{
-  background-color: #32b6e6c0;
+  background-color: #32b6e6;
+}
+
+.next-nav li{
+  transition: 0.3s all linear;
+}
+.next-nav li:hover{
+    cursor: pointer;
+    color: #000000;
+}
+
+.read-btn {
+  background-color: #ffffff;
+  color: rgb(5, 5, 5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.read-btn i {
+  transition:  0.3s all linear;
+}
+
+.read-btn:hover {
+  background-color:  #32b6e6;
+  color: #ffffff;
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.read-btn:hover i {
+  transform: translateX(5px);
+}
+
+.ceo span i{
+    cursor: pointer;
+    transition: 0.4s all linear;
+}
+
+.ceo span i:hover{
+  color: #32b6e6;
 }

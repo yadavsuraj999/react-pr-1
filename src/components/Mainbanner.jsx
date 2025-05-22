@@ -13,7 +13,9 @@ const Mainbanner = () => {
                   <h1 className="display-1 main-heading fw-bold">
                     CROSSFIT EXERCISES ON EVERY DAY.
                   </h1>
-                  <button className="py-2 border-0 px-4 rounded-5 fw-medium d-flex gap-2 read-btn">READ MORE<i class="bi bi-chevron-right"></i></button>
+                  <button className="py-2 border-0 px-4 rounded-5 fw-medium d-flex align-items-center gap-2 read-btn">
+                    READ MORE <i className="bi bi-chevron-right"></i>
+                  </button>
                 </div>
               </div>
             </div>
