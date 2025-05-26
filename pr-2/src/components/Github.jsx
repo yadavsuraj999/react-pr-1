@@ -6,6 +6,7 @@ const Github = () => {
   const [enter, setEnter] = useState({});
   const [user, setUser] = useState({});
   const cardRef = useRef(null); // ✅ ref for the card
+  const inputClean = useRef(null)
 
   useEffect(() => {
     const person = async () => {
@@ -30,13 +31,15 @@ const Github = () => {
         console.error("Download failed", err);
       });
   };
+  
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-6">
       <div className="w-full max-w-xl bg-neutral-900 rounded-3xl shadow-2xl p-8 space-y-8 text-white border border-neutral-700">
         <h1 className="text-4xl font-extrabold text-center">GitHub User Finder</h1>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <input
+            ref ={inputClean}
             type="text"
             className="w-full bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
             placeholder="Enter GitHub username"
@@ -49,7 +52,9 @@ const Github = () => {
             className="bg-pink-600 hover:bg-pink-700 text-white px-5 py-3 rounded-xl font-semibold transition-all"
             onClick={() => {
               setEnter(input);
-              console.log(enter);
+              {inputClean.current.value = ""}
+              
+              console.log(inputClean);
             }}
           >
             Search
