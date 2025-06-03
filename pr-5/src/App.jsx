@@ -1,4 +1,7 @@
-import Comments from './components/Comments.jsx'
+import Comments from "./components/Comments"
+
+
+
 
 const App = () => {
   return (
