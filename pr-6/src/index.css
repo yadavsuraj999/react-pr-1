@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ledger&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -17,13 +19,58 @@ header h1 {
     color: var(--heading-color);
 }
 
-header{
-    /* color: var(--default-color); */
-    /* background-color: var(--background-color); */
-    padding: 15px 0;
-    /* transition: all 0.5s;
-    z-index: 997; */
-}
 header nav ul li{
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: 0.3s all linear;
+}
+header nav ul li:hover{
+    color: #ff481f;
+}
+
+.padding{
     padding: 18px 15px;
+}
+.padding button{
+    padding: 12px 40px 12px 40px;
+    border-radius: 25px;
+    border: 1px solid #ff481f;
+    background-color: transparent;
+    color: #ff481f;
+    font-size: 18px;
+    transition: 0.3s all linear;
+}
+.padding button:hover{
+    background-color: #ff481f;
+    color: #fdfdfd;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.input{
+    width: calc(100% - 210px);
+    height: 65px;
+    font-size: 18px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0);
+    padding: 0 25px;
+}
+
+.btn-1{
+    height: 65px;
+    width: 190px;
+    border: none;
+    background: #ff481f;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 18px;
+    transition: all .3s ease-in-out 0s;
+}
+
+.pos-img{
+    top: 35%;
 }
