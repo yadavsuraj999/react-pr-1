@@ -97,3 +97,14 @@ ul {
 .pt-180{
     padding-top: 180px !important;
 }
+
+.swipper-bg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background: url("https://srbthemes.kcubeinfotech.com/retro/retro/images/assets/bg_05.png")
+    no-repeat center top;
+  background-size: cover;
+}

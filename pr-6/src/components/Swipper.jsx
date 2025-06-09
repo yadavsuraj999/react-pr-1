@@ -36,12 +36,12 @@ const Swipper = () => {
   ];
 
   return (
-    <section className="py-5">
+    <section className="py-5 position-relative bg-ai">
       <div className="container mb-5">
         <div className="row align-items-center">
           <div className="col-md-6">
-            <h1 className="display-1 fw-bolder">130,000+</h1>
-            <p className="fs-3">Customers love our product</p>
+            <h1 className="display-1 fw-bolder text-white">130,000+</h1>
+            <p className="fs-3 text-white">Customers love our product</p>
           </div>
           <div className="col-md-6 text-end">
             <img
@@ -50,41 +50,50 @@ const Swipper = () => {
               className="img-fluid mb-3"
               style={{ maxWidth: "300px" }}
             />
-            <p className="fs-4">
+            <p className="fs-4 text-white">
               Client satisfaction speaks louder than our words. Hear from them.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="container">
+      <div className="">
         <Swiper
           spaceBetween={30}
-          // slidesPerView={3}
-          centeredSlides={true}
+          slidesPerView={1}
+
+          // centeredSlides={true}
           loop={true}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
           pagination={{ clickable: true }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
+          // navigation={true}
+          modules={[Autoplay, Pagination]}
           className="mySwiper"
+
+           breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          
+        }}
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="p-4 bg-light rounded py-5 px-4 shadow">
-                <div className="d-flex align-items-center">
-                  <div>
+              <div className=" p-4 bg-white rounded py-5 px-4 shadow">
+                <div className="row align-items-center">
+                  <div className="col-lg-6 col-12">
                     <img
                       src={item.image}
                       alt="Client"
                       className="img-fluid rounded mb-4"
                     />
                   </div>
-                  <div>
-                    <h4 className="fw-bold">{item.heading}</h4>
+                  <div className="col-lg-6 col-12">
+                    <h4 className="fw-bold fs-2">{item.heading}</h4>
                     <p className="fs-4 fst-italic">
                       {item.quote}
                     </p>
@@ -101,6 +110,7 @@ const Swipper = () => {
           ))}
         </Swiper>
       </div>
+      <div className="swipper-bg"></div>
     </section>
   );
 };
