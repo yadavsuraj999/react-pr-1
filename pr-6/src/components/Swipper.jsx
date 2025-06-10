@@ -13,7 +13,7 @@ const Swipper = () => {
       name: "Stefan Jong",
       position: "Senior Officer, Arong",
       rating: 5,
-      heading:"Incredible Work!"
+      heading: "Incredible Work!"
     },
     {
       image:
@@ -22,7 +22,7 @@ const Swipper = () => {
       name: "Sara Lane",
       position: "Project Manager, DevUp",
       rating: 4.5,
-      heading:"Awsome!"
+      heading: "Awsome!"
     },
     {
       image:
@@ -31,7 +31,7 @@ const Swipper = () => {
       name: "Michael Doe",
       position: "CMO, FastConnect",
       rating: 5,
-      heading:"Very Solid!"
+      heading: "Very Solid!"
     },
   ];
 
@@ -68,18 +68,21 @@ const Swipper = () => {
             delay: 5000,
             disableOnInteraction: false,
           }}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+            // el: '.custom-pagination' // optional if you want to use a custom container
+          }}
           // navigation={true}
           modules={[Autoplay, Pagination]}
-          className="mySwiper"
+          className="mySwiper overflow-y-visible"
 
-           breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          
-        }}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+
+          }}
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>

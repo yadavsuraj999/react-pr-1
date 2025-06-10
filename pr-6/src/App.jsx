@@ -5,6 +5,7 @@ import AIintro from './components/AIintro';
 import Chatbot from './components/Chatbot';
 import Notification from './components/Notification';
 import Swipper from './components/Swipper';
+import Brand from './components/Brand';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Chatbot/>
       <Notification/>
       <Swipper/>
+      <Brand/>
     </div>
   )
 }
