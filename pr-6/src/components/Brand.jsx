@@ -2,7 +2,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 const Brand = () => {
     return (
-        <section className='bg-ai pt-180'>
+        <section className='bg-ai pt-180 mb-150'>
             <div className="container">
                 <div className="">
                     <h1 className="display-3 text-center fw-bold text-white mb-5">

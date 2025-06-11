@@ -6,6 +6,8 @@ import Chatbot from './components/Chatbot';
 import Notification from './components/Notification';
 import Swipper from './components/Swipper';
 import Brand from './components/Brand';
+import Freetrail from './components/Freetrail';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
       <Notification/>
       <Swipper/>
       <Brand/>
+      <Freetrail/>
+      <Footer/>
     </div>
   )
 }

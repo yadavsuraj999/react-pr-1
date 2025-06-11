@@ -77,6 +77,14 @@ ul {
   padding-top: 80px;
 }
 
+.pt-90 {
+  padding-top: 90px;
+}
+
+.pb-90 {
+  padding-bottom: 70px;
+}
+
 .bg-chat {
   position: absolute;
   bottom: 0;
@@ -92,8 +100,15 @@ ul {
   border-radius: 40px;
 }
 
+.mb-150 {
+  padding-bottom: 150px;
+}
+
 .pt-180 {
   padding-top: 180px !important;
+}
+.pt-130 {
+  padding-top: 130px !important;
 }
 
 .swipper-bg {
@@ -114,14 +129,14 @@ ul {
   border: 1px solid black;
 }
 
-.swiper-pagination{
+.swiper-pagination {
   position: relative !important;
   bottom: -20px !important;
 }
 
 
 
-.accordion-button{
+.accordion-button {
   background-color: #120e0e !important;
   color: white !important;
   padding-block: 50px !important;
@@ -131,21 +146,120 @@ ul {
   font-weight: 700 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
-.accordion-item{
+
+.accordion-item {
   border: none !important;
   background-color: #120e0e !important;
   color: white !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
-.accordion-button:focus{
-border: none !important;
+
+.accordion-button:focus {
+  border: none !important;
   box-shadow: none !important;
 }
 
-.accordion-button::after{
+.accordion-button::after {
   filter: invert(1);
 }
 
-.accordion-body{
+.accordion-body {
   font-size: 22px !important;
+}
+
+.retor-color {
+  color: #ff481f;
+}
+
+.btn-seven {
+  font-family: "Outfit", sans-serif;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 50px;
+  padding: 0 45px;
+  line-height: 60px;
+  background: #ff481f;
+  text-align: center;
+  transition: all .3s ease-in-out 0s;
+}
+
+.free-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background: url("http://srbthemes.kcubeinfotech.com/retro/retro/images/assets/bg_06_w.png") no-repeat center top;
+  background-size: cover;
+}
+
+.footer-one .footer-intro h3 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.15625em;
+  letter-spacing: -1px;
+}
+
+.footer-one .footer-intro form input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 10px;
+  background: #fff;
+  padding: 20px 70px 20px 20px;
+  font-size: 20px;
+  color: #000;
+}
+
+input,
+textarea {
+  outline: none;
+  box-shadow: none;
+  transition: all .3s ease-in-out;
+}
+
+.footer-one .footer-intro form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+}
+
+button {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  display: block;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  color: inherit;
+}
+
+.footer-one .footer-intro form {
+  height: 70px;
+  margin-top: 50px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.social-icon li {
+  background: #fff;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 22px;
+  transition: all .3s ease-in-out 0s;
 }
