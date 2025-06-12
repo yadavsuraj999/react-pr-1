@@ -75,9 +75,8 @@ const Comments = () => {
       stars.push(
         <svg
           key={i}
-          className={`w-5 h-5 ${
-            i < count ? "text-yellow-400" : "text-gray-600"
-          }`}
+          className={`w-5 h-5 ${i < count ? "text-yellow-400" : "text-gray-600"
+            }`}
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
