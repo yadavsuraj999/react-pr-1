@@ -2,7 +2,7 @@ import TodoList from "./components/TodoList"
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-blue">
       <TodoList/>
     </div>
   )

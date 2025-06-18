@@ -61,27 +61,18 @@ const Swipper = () => {
         <Swiper
           spaceBetween={30}
           slidesPerView={1}
-
-          // centeredSlides={true}
           loop={true}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
-          pagination={{
-            clickable: true,
-            // el: '.custom-pagination' // optional if you want to use a custom container
-          }}
-          // navigation={true}
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay]}
           className="mySwiper overflow-y-visible"
-
           breakpoints={{
             640: {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-
           }}
         >
           {testimonials.map((item, index) => (

@@ -8,7 +8,7 @@ const Freetrail = () => {
                     </div>
                     <div className="col-md-6 col-12">
                         <p class="fs-4 text-black mb-5 text-white">Try it risk free — we don’t charge cancellation fees</p>
-                        <a href="contact-dark.html" class="btn-seven">Let’s Get Started</a>
+                        <button class="btn-seven">Let’s Get Started</button>
                     </div>
                 </div>
             </div>

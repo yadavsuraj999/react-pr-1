@@ -21,8 +21,8 @@
 .bg-brown {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 60%;
   height: 100%;
   background: url(https://srbthemes.kcubeinfotech.com/retro/retro/images/assets/bg_03.png) no-repeat center;
   background-size: cover;
@@ -34,7 +34,7 @@
   top: 35%;
   left: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 2;
 }
 
 .overlay-img {
@@ -53,7 +53,8 @@
   padding: 0 25px;
 }
 
-.btn-1 {
+.btn-1 button{
+  cursor: pointer;
   height: 65px;
   width: 190px;
   border: none;
@@ -63,6 +64,11 @@
   font-weight: 700;
   font-size: 18px;
   transition: all 0.3s ease-in-out;
+}
+
+.btn-1 button:hover {
+ background-color: #ffffff;
+  color: #000;
 }
 
 ul {
@@ -172,8 +178,8 @@ ul {
 }
 
 .btn-seven {
+  cursor: pointer !important;
   font-family: "Outfit", sans-serif;
-  text-decoration: none;
   display: inline-block;
   font-weight: 500;
   font-size: 20px;
@@ -182,8 +188,11 @@ ul {
   padding: 0 45px;
   line-height: 60px;
   background: #ff481f;
-  text-align: center;
   transition: all .3s ease-in-out 0s;
+}
+
+.btn-seven:hover{
+  background-color: #fff;
 }
 
 .free-bg {
@@ -197,7 +206,7 @@ ul {
 }
 
 .footer-one .footer-intro h3 {
-  font-size: 64px;
+  font-size: 54px;
   font-weight: 700;
   line-height: 1.15625em;
   letter-spacing: -1px;
@@ -262,4 +271,52 @@ button {
   color: #000;
   font-size: 22px;
   transition: all .3s ease-in-out 0s;
+}
+
+.btn-color{
+  background-color: #ff481f;
+}
+
+.nav-hovers li{
+  cursor: pointer;
+  transition: 0.3s all linear;
+}
+
+.nav-hovers li:hover{
+  color: #ff481f;
+}
+
+.footer-nav ul li{
+  cursor: pointer;
+  transition: 0.3s all linear;
+}
+
+.footer-nav ul li:hover{
+  color: #ff481f;
+}
+
+.tel{
+  cursor: pointer;
+  transition: 0.3s all linear;
+}
+
+.tel:hover{
+  color: #ff481f;
+}
+
+.social-icon{
+  cursor: pointer;
+  transition: 0.3s all linear;
+}
+.social-icon li:hover{
+  background-color: #ff481f;
+  color: #ffffff;
+}
+
+.cursor{
+    cursor: pointer;
+    transition: 0.2s all linear;
+}
+.cursor:hover{
+  color: #ff481f !important;
 }
