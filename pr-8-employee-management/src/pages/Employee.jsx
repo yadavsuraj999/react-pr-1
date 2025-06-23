@@ -1,4 +1,17 @@
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 const Employee = () => {
+
+    const [employee, setEmployee] = useState([])
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        let employeedata = JSON.parse(localStorage.getItem("employee")) || [];
+        setEmployee(employeedata)
+    }, [])
+
     return (
         <div>
             <div className="py-24 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen relative overflow-hidden">
@@ -17,9 +30,9 @@ const Employee = () => {
 
                         <button
                             className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2"
-                            // onClick={() => {
-                            //     navigate("/add-employee")
-                            // }}
+                            onClick={() => {
+                                navigate("/addemployee")
+                            }}
                         >
                             <span className="text-lg">+</span>
                             <span>Add Employee</span>
@@ -32,12 +45,12 @@ const Employee = () => {
                                 <div className="text-6xl mb-6">👥</div>
                                 <h1 className="text-3xl font-bold text-gray-700 mb-4">No Employees Found</h1>
                                 <p className="text-gray-500 mb-8">Start building your team by adding your first employee</p>
-                                <button
+                                {/* <button
                                     className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                    // onClick={() => navigate("/add-employee")}
+                                    onClick={() => navigate("/addemployee")}
                                 >
                                     Add First Employee
-                                </button>
+                                </button> */}
                             </div>
                 
                     </div>
