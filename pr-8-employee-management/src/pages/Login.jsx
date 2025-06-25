@@ -21,7 +21,7 @@ const Login = ({ setIsLoggedin }) => {
         if (input.email == "admin@gmail.com" && input.password == "admin@123") {
             toast.success("Logged In SuccesFully");
             setIsLoggedin(true)
-            localStorage.setItem("isloggedin", JSON.parse(true))
+            localStorage.setItem("isloggedin", JSON.stringify(true));
             navigate("/employee")
         } else {
             toast.error("user or password was worng")
