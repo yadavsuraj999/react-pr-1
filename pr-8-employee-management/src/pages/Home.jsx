@@ -1,23 +1,23 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="pt-16">
+        <div className="pt-16 bg-gray-900 text-gray-200 min-h-screen">
             {/* Features Section */}
-            <section className="py-20 bg-gray-50">
+            <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-gray-900 mb-4">Comprehensive HR Solutions</h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        <h2 className="text-4xl font-extrabold text-white mb-4 leading-tight tracking-tight">
+                            Comprehensive HR Solutions
+                        </h2>
+                        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
                             Everything you need to manage your workforce efficiently and effectively
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Repeatable Feature Card */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {[
                             {
                                 title: 'Employee Management',
@@ -68,14 +68,29 @@ const Home = () => {
                                     'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
                             },
                         ].map((item, idx) => (
-                            <div key={idx} className="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 animate-slide-up">
-                                <div className={`w-16 h-16 bg-gradient-to-br from-${item.iconColor}-500 to-${item.iconColor}-600 rounded-xl flex items-center justify-center mb-6`}>
-                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.svgPath}></path>
+                            <div
+                                key={idx}
+                                className="bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-700 hover:shadow-2xl transition-transform transform hover:-translate-y-2 duration-300"
+                            >
+                                <div
+                                    className={`w-16 h-16 bg-gradient-to-br from-${item.iconColor}-500 to-${item.iconColor}-600 rounded-xl flex items-center justify-center mb-6 shadow-md`}
+                                >
+                                    <svg
+                                        className="w-8 h-8 text-white"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d={item.svgPath}
+                                        />
                                     </svg>
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                                <h3 className="text-2xl font-semibold text-white mb-3">{item.title}</h3>
+                                <p className="text-gray-400 text-base leading-relaxed">{item.description}</p>
                             </div>
                         ))}
                     </div>
