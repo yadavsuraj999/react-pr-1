@@ -5,7 +5,6 @@ const Home = () => {
 
     return (
         <div className="pt-16 bg-gray-900 text-gray-200 min-h-screen">
-            {/* Features Section */}
             <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
@@ -21,7 +20,6 @@ const Home = () => {
                         {[
                             {
                                 title: 'Employee Management',
-                                iconColor: 'blue',
                                 description:
                                     'Comprehensive employee profiles, onboarding processes, and performance tracking to manage your workforce effectively.',
                                 svgPath:

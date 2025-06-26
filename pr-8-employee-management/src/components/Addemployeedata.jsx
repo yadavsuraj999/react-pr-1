@@ -43,10 +43,10 @@ const Addemployedata = () => {
     };
 
     return (
-        <div className="min-h-[83vh] flex items-center justify-center p-6 bg-gradient-to-br from-gray-50 to-blue-50">
-            <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
+        <div className="h-[100vh] flex items-center justify-center p-6 bg-gray-900 text-white">
+            <div className="bg-gray-800 rounded-2xl shadow-xl p-8 w-full max-w-2xl">
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-full mb-4 shadow-md">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-700 rounded-full mb-4 shadow-md">
                         <svg
                             className="w-8 h-8 text-white"
                             fill="none"
@@ -61,10 +61,10 @@ const Addemployedata = () => {
                             />
                         </svg>
                     </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-3xl font-bold text-white mb-2">
                         Employee Management
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-gray-300">
                         Add new employee to the system
                     </p>
                 </div>
@@ -74,10 +74,10 @@ const Addemployedata = () => {
                         <div>
                             <label
                                 htmlFor="name"
-                                className="mb-2 text-sm font-medium text-gray-900 flex items-center"
+                                className="mb-2 text-sm font-medium text-white flex items-center"
                             >
                                 <svg
-                                    className="w-4 h-4 mr-2 text-blue-600"
+                                    className="w-4 h-4 mr-2 text-blue-400"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -94,26 +94,26 @@ const Addemployedata = () => {
                             <input
                                 type="text"
                                 id="name"
-                                className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-3 transition-all duration-200 hover:bg-gray-100 focus:bg-white focus:shadow-md ${error.name
+                                className={`bg-gray-700 text-white text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-3 transition-all duration-200 hover:bg-gray-600 focus:bg-gray-900 focus:shadow-md ${error.name
                                         ? "border border-red-500"
-                                        : "border border-gray-300"
+                                        : "border border-gray-600"
                                     }`}
                                 placeholder="John"
                                 onChange={handleChange}
                                 value={employee.name}
                             />
                             {error.name && (
-                                <p className="text-red-500 text-sm mt-1">{error.name}</p>
+                                <p className="text-red-400 text-sm mt-1">{error.name}</p>
                             )}
                         </div>
 
                         <div>
                             <label
                                 htmlFor="salary"
-                                className="mb-2 text-sm font-medium text-gray-900 flex items-center"
+                                className="mb-2 text-sm font-medium text-white flex items-center"
                             >
                                 <svg
-                                    className="w-4 h-4 mr-2 text-green-600"
+                                    className="w-4 h-4 mr-2 text-green-400"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -130,9 +130,9 @@ const Addemployedata = () => {
                             <input
                                 type="number"
                                 id="salary"
-                                className={`bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-3 transition-all duration-200 hover:bg-gray-100 focus:bg-white focus:shadow-md ${error.salary
+                                className={`bg-gray-700 text-white text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-3 transition-all duration-200 hover:bg-gray-600 focus:bg-gray-900 focus:shadow-md ${error.salary
                                         ? "border border-red-500"
-                                        : "border border-gray-300"
+                                        : "border border-gray-600"
                                     }`}
                                 placeholder="Enter salary amount"
                                 onChange={handleChange}
@@ -140,7 +140,7 @@ const Addemployedata = () => {
                                 min="0"
                             />
                             {error.salary && (
-                                <p className="text-red-500 text-sm mt-1">{error.salary}</p>
+                                <p className="text-red-400 text-sm mt-1">{error.salary}</p>
                             )}
                         </div>
                     </div>
@@ -148,10 +148,10 @@ const Addemployedata = () => {
                     <div>
                         <label
                             htmlFor="department"
-                            className="mb-2 text-sm font-medium text-gray-900 flex items-center"
+                            className="mb-2 text-sm font-medium text-white flex items-center"
                         >
                             <svg
-                                className="w-4 h-4 mr-2 text-purple-600"
+                                className="w-4 h-4 mr-2 text-purple-400"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -167,27 +167,27 @@ const Addemployedata = () => {
                         </label>
                         <select
                             id="department"
-                            className={`bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 w-full p-3 transition-all duration-200 hover:bg-gray-100 focus:bg-white focus:shadow-md ${error.department
+                            className={`bg-gray-700 text-white text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 w-full p-3 transition-all duration-200 hover:bg-gray-600 focus:bg-gray-900 focus:shadow-md ${error.department
                                     ? "border border-red-500"
-                                    : "border border-gray-300"
+                                    : "border border-gray-600"
                                 }`}
                             onChange={handleChange}
                             value={employee.department}
                         >
                             <option value="">Choose a Department</option>
-                            <option value="1">Designing</option>
-                            <option value="2">Development</option>
-                            <option value="3">Finance</option>
-                            <option value="4">Sales And Marketing</option>
+                            <option value="Designing">Designing</option>
+                            <option value="Development">Development</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Marketing">Marketing</option>
                         </select>
                         {error.department && (
-                            <p className="text-red-500 text-sm mt-1">{error.department}</p>
+                            <p className="text-red-400 text-sm mt-1">{error.department}</p>
                         )}
                     </div>
 
                     <div className="text-center pt-6">
                         <button
-                            className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl hover:from-indigo-700 hover:to-blue-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                             type="submit"
                         >
                             <svg
@@ -208,10 +208,10 @@ const Addemployedata = () => {
                     </div>
                 </form>
 
-                <div className="mt-8 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
+                <div className="mt-8 p-4 bg-gray-700 rounded-lg border-l-4 border-blue-600">
                     <div className="flex items-center">
                         <svg
-                            className="w-5 h-5 text-blue-600 mr-2"
+                            className="w-5 h-5 text-blue-400 mr-2"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                         >
@@ -221,9 +221,8 @@ const Addemployedata = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <p className="text-sm text-blue-700">
-                            All fields are required. Please ensure the information is accurate
-                            before submitting.
+                        <p className="text-sm text-blue-300">
+                            All fields are required. Please ensure the information is accurate before submitting.
                         </p>
                     </div>
                 </div>

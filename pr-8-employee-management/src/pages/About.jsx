@@ -2,7 +2,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br pt-40 from-gray-900 via-gray-800 to-gray-900 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Header Section - Centered */}
+        
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl mb-8 shadow-lg">
             <svg
@@ -30,9 +30,7 @@ const About = () => {
           </p>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          {/* Company Overview */}
           <div className="backdrop-blur-sm bg-gray-800/80 border border-gray-700 rounded-3xl p-8 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center mr-4">
@@ -77,7 +75,6 @@ const About = () => {
             </div>
           </div>
 
-          {/* Mission & Vision */}
           <div className="space-y-6">
             <div className="backdrop-blur-sm bg-gradient-to-br from-blue-900/80 to-blue-800/60 border border-blue-700/50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center mb-4">
@@ -138,8 +135,6 @@ const About = () => {
             </div>
           </div>
         </div>
-
-        {/* Key Features - Centered Grid */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">
             Why Choose EmpowerHR?
@@ -226,20 +221,6 @@ const About = () => {
             ))}
           </div>
         </div>
-
-        {/* Call to Action */}
-        {/* <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Empower Your HR?
-          </h2>
-          <p className="text-gray-300 mb-6 max-w-xl mx-auto">
-            Join thousands of businesses transforming their workforce management
-            with EmpowerHR.
-          </p>
-          <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:from-indigo-700 hover:to-blue-700 transition duration-300">
-            Get Started
-          </button>
-        </div> */}
       </div>
     </div>
   );

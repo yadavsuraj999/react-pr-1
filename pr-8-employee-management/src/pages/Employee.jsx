@@ -5,6 +5,12 @@ import EmployeeTable from "../components/EmployeeTable";
 const Employee = () => {
   const [employee, setEmployee] = useState([]);
 
+  const [filter, setFilter] = useState({
+    search: '', department: ''
+  })
+
+  const [sorting, setSorting] = useState(false)
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,16 +24,32 @@ const Employee = () => {
     localStorage.setItem("employee", JSON.stringify(updatedEmployee));
   };
 
+  const filteredEmployee = employee.filter((emp) => {
+    if (filter.search == '') {
+      return emp;
+    } else {
+      return emp.name.toLowerCase().includes(filter.search.trim().toLowerCase());
+    }
+  }).filter((emp) => {
+    return filter.department === "" ? true : emp.department == filter.department
+  })
+  const sortArr = () => {
+    setSorting(!sorting)
+    const updatedArr = [...filteredEmployee]
+      updatedArr.sort((a, b) => {
+        return sorting ? a.salary - b.salary : b.salary - a.salary;
+      })
+
+      setEmployee(updatedArr)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 px-4 py-24 relative overflow-hidden">
-      {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl translate-x-32 -translate-y-32"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl -translate-x-32 translate-y-32"></div>
 
       <div className="container mx-auto relative z-10 max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
           <div>
-            <h4 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent mb-2 tracking-wide">
+            <h4 className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent pb-2 tracking-wide">
               Employee Directory
             </h4>
             <p className="text-gray-300 max-w-md">
@@ -35,18 +57,36 @@ const Employee = () => {
             </p>
           </div>
 
-          <button
-            onClick={() => navigate("/addemployee")}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-indigo-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <span className="text-lg font-bold">+</span>
-            <span>Add Employee</span>
-          </button>
+          <div className="flex gap-5">
+
+            <select
+              id="department" value={filter.department}
+              className="bg-gray-700 text-white text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 p-2 transition-all duration-200 hover:bg-gray-600 focus:bg-gray-900 focus:shadow-md " onChange={(e) => {
+                setFilter({ ...filter, [e.target.id]: e.target.value })
+              }}
+            >
+              <option value="">Choose a Department</option>
+              <option value="Designing">Designing</option>
+              <option value="Development">Development</option>
+              <option value="Finance">Finance</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+            <input type="text" id="search" placeholder="Search Employee" value={filter.search} onChange={(e) => {
+              setFilter({ ...filter, [e.target.id]: e.target.value })
+            }} className=" bg-gray-700 text-white px-6 py-2 rounded-xl font-semibold" />
+            <button
+              onClick={() => navigate("/addemployee")}
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-indigo-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <span className="text-lg font-bold">+</span>
+              <span>Add Employee</span>
+            </button>
+          </div>
         </div>
 
         <div className="bg-gray-800 rounded-3xl shadow-2xl border border-gray-700 overflow-hidden">
-          {employee.length > 0 ? (
-            <EmployeeTable employee={employee} onDelete={onDelete} />
+          {filteredEmployee.length > 0 ? (
+            <EmployeeTable employee={filteredEmployee} onDelete={onDelete} sortArr={sortArr} sorting={sorting} />
           ) : (
             <div className="text-center py-20 px-4">
               <div className="text-7xl mb-6">👥</div>
@@ -56,12 +96,6 @@ const Employee = () => {
               <p className="text-gray-400 mb-8 max-w-md mx-auto">
                 Start building your team by adding your first employee
               </p>
-              <button
-                onClick={() => navigate("/addemployee")}
-                className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-indigo-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1"
-              >
-                Add First Employee
-              </button>
             </div>
           )}
         </div>

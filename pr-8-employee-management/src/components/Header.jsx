@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Header = ({ isLoggedin, setIsLoggedin }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleClick = () => {
     setIsLoggedin(false);
@@ -17,7 +17,6 @@ const Header = ({ isLoggedin, setIsLoggedin }) => {
       <nav className="fixed top-0 w-full z-50 bg-gray-900 shadow-md border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <div className="flex items-center">
@@ -30,19 +29,17 @@ const Header = ({ isLoggedin, setIsLoggedin }) => {
                 </div>
               </div>
             </div>
-
-            {/* Navigation Links */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link
                   to="/"
-                  className="px-4 py-2 rounded-full font-semibold text-blue-400 bg-gray-800 hover:bg-gray-700 hover:text-white transition duration-300"
+                  className={`px-4 py-2 rounded-full font-semibold  ${pathname=="/"?"text-blue-400 bg-gray-800":" text-white"}  hover:bg-gray-700 hover:text-white transition duration-300`}
                 >
                   Home
                 </Link>
                 <Link
                   to="/about"
-                  className="px-4 py-2 rounded-full font-semibold text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition duration-300"
+                  className={`px-4 py-2 rounded-full font-semibold ${pathname=="/about"?"text-blue-400 bg-gray-800":" text-white"}  hover:text-blue-400 hover:bg-gray-800 transition duration-300`}
                 >
                   About
                 </Link>
@@ -50,7 +47,7 @@ const Header = ({ isLoggedin, setIsLoggedin }) => {
                 {isLoggedin && (
                   <Link
                     to="/employee"
-                    className="px-4 py-2 rounded-full font-semibold text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition duration-300"
+                    className={`px-4 py-2 rounded-full font-semibold ${pathname=="/employee"?"text-blue-400 bg-gray-800":" text-white"}  hover:text-blue-400 hover:bg-gray-800 transition duration-300`}
                   >
                     Employee
                   </Link>
