@@ -1,10 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const Form = ({ addStudent }) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const contactRegex = /^[0-9]{10}$/;
-
-  const [input, setInput] = useState({
+const Form = ({ addStudent, editUser }) => {
+  const initial = {
     fname: "",
     email: "",
     password: "",
@@ -12,200 +9,179 @@ const Form = ({ addStudent }) => {
     course: "",
     contact: "",
     gender: "",
-  });
-
-  const [error, setError] = useState({});
-  const inputref = useRef(null);
-
-  const handlechange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
   };
+
+  const [input, setInput] = useState(initial);
+  const [error, setError] = useState({});
+  const formRef = useRef(null);
+
+  // Prefill when editing
+  useEffect(() => {
+    if (editUser) {
+      setInput({ ...editUser, confirmpassword: editUser.password });
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [editUser]);
+
+  const handlechange = (e) =>
+    setInput((i) => ({ ...i, [e.target.name]: e.target.value }));
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    let errorObj = {};
+    const errs = {};
 
-    if (input.fname.trim() === "") {
-      errorObj.fname = "Please enter your name.";
-    }
-    if (input.email.trim() === "" || !emailRegex.test(input.email)) {
-      errorObj.email = "Please enter a valid email.";
-    }
-    if (input.password.trim() === "") {
-      errorObj.password = "Please enter your password.";
-    } else if (input.password.length < 8) {
-      errorObj.password = "Password should be at least 8 characters long.";
-    }
-    if (input.confirmpassword.trim() === "") {
-      errorObj.confirmpassword = "Please confirm your password.";
-    }
-    if (input.password !== input.confirmpassword) {
-      errorObj.password = "Passwords do not match.";
-      errorObj.confirmpassword = "Passwords do not match.";
-    }
-    if (input.course.trim() === "") {
-      errorObj.course = "Please select a course.";
-    }
-    if (input.contact.trim() === "" || !contactRegex.test(input.contact)) {
-      errorObj.contact = "Please enter a valid 10-digit phone number.";
-    }
-    if (input.gender === "") {
-      errorObj.gender = "Please select a gender.";
-    }
+    if (!input.fname.trim()) errs.fname = "Full name is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email))
+      errs.email = "A valid email is required.";
+    if (input.password.length < 8)
+      errs.password = "Password must be at least 8 characters.";
+    if (input.password !== input.confirmpassword)
+      errs.confirmpassword = "Passwords must match.";
+    if (!input.gender) errs.gender = "Please select your gender.";
+    if (!["uiux", "fullstack", "graphic"].includes(input.course))
+      errs.course = "Please select a course.";
+    if (!/^\d{10}$/.test(input.contact))
+      errs.contact = "Contact must be a 10‑digit number.";
 
-    setError(errorObj);
-
-    if (Object.keys(errorObj).length > 0) return;
+    setError(errs);
+    if (Object.keys(errs).length) return;
 
     addStudent(input);
-
-    // Reset form
-    setInput({
-      fname: "",
-      email: "",
-      password: "",
-      confirmpassword: "",
-      course: "",
-      contact: "",
-      gender: "",
-    });
+    setInput(initial);
   };
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center min-h-screen">
-      <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
-          Course Registration Form
-        </h2>
-        <form className="space-y-5" onSubmit={handlesubmit} ref={inputref}>
-          {/* Full Name */}
-          <div>
-            <label htmlFor="fname" className="block text-sm font-medium text-gray-700">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="fname"
-              value={input.fname}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
-              onChange={handlechange}
-            />
-            {error.fname && <p className="text-sm text-red-600">{error.fname}</p>}
-          </div>
+    <div ref={formRef} className="bg-white shadow-md rounded-lg p-8 mb-8 ">
+      <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
+        {editUser ? "Edit Student" : "Register New Student"}
+      </h2>
+      <form onSubmit={handlesubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Full Name */}
+        <div className="col-span-1 md:col-span-2">
+          <label className="font-medium text-gray-700">Full Name</label>
+          <input
+            name="fname"
+            value={input.fname}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.fname ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {error.fname && <p className="text-red-600 text-sm mt-1">{error.fname}</p>}
+        </div>
 
-          {/* Gender */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Gender
-            </label>
-            <div className="flex gap-4">
-              {["male", "female", "other"].map((g) => (
-                <label key={g} className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value={g}
-                    checked={input.gender === g}
-                    onChange={handlechange}
-                  />
-                  <span className="ml-2 text-gray-700 capitalize">{g}</span>
-                </label>
-              ))}
-            </div>
-            {error.gender && <p className="text-sm text-red-600">{error.gender}</p>}
+        {/* Gender */}
+        <div>
+          <label className="font-medium text-gray-700">Gender</label>
+          <div className="mt-1 flex gap-4">
+            {["male", "female", "other"].map((g) => (
+              <label key={g} className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="gender"
+                  value={g}
+                  checked={input.gender === g}
+                  onChange={handlechange}
+                  className="h-4 w-4 text-indigo-600"
+                />
+                <span className="ml-2 capitalize text-gray-700">{g}</span>
+              </label>
+            ))}
           </div>
+          {error.gender && <p className="text-red-600 text-sm">{error.gender}</p>}
+        </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={input.email}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
-              onChange={handlechange}
-            />
-            {error.email && <p className="text-sm text-red-600">{error.email}</p>}
-          </div>
+        {/* Email */}
+        <div>
+          <label className="font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={input.email}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.email ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {error.email && <p className="text-red-600 text-sm">{error.email}</p>}
+        </div>
 
-          {/* Password */}
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={input.password}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
-              onChange={handlechange}
-            />
-            {error.password && <p className="text-sm text-red-600">{error.password}</p>}
-          </div>
+        {/* Password */}
+        <div>
+          <label className="font-medium text-gray-700">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={input.password}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.password ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {error.password && <p className="text-red-600 text-sm">{error.password}</p>}
+        </div>
 
-          {/* Confirm Password */}
-          <div>
-            <label htmlFor="confirmpassword" className="block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmpassword"
-              value={input.confirmpassword}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
-              onChange={handlechange}
-            />
-            {error.confirmpassword && <p className="text-sm text-red-600">{error.confirmpassword}</p>}
-          </div>
+        {/* Confirm Password */}
+        <div>
+          <label className="font-medium text-gray-700">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmpassword"
+            value={input.confirmpassword}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.confirmpassword ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {error.confirmpassword && (
+            <p className="text-red-600 text-sm">{error.confirmpassword}</p>
+          )}
+        </div>
 
-          {/* Course */}
-          <div>
-            <label htmlFor="course" className="block text-sm font-medium text-gray-700">
-              Select Course
-            </label>
-            <select
-              name="course"
-              value={input.course}
-              onChange={handlechange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm"
-            >
-              <option value="">-- Select Course --</option>
-              <option value="uiux">UI/UX Designer</option>
-              <option value="fullstack">Full Stack Developer</option>
-              <option value="graphic">Graphic Designer</option>
-            </select>
-            {error.course && <p className="text-sm text-red-600">{error.course}</p>}
-          </div>
+        {/* Course */}
+        <div>
+          <label className="font-medium text-gray-700">Course</label>
+          <select
+            name="course"
+            value={input.course}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.course ? "border-red-500" : "border-gray-300"
+            }`}
+          >
+            <option value="">Select a course...</option>
+            <option value="uiux">UI/UX Designer</option>
+            <option value="fullstack">Full Stack Developer</option>
+            <option value="graphic">Graphic Designer</option>
+          </select>
+          {error.course && <p className="text-red-600 text-sm">{error.course}</p>}
+        </div>
 
-          {/* Contact */}
-          <div>
-            <label htmlFor="contact" className="block text-sm font-medium text-gray-700">
-              Contact Number
-            </label>
-            <input
-              type="tel"
-              name="contact"
-              value={input.contact}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm"
-              onChange={handlechange}
-            />
-            {error.contact && <p className="text-sm text-red-600">{error.contact}</p>}
-          </div>
+        {/* Contact */}
+        <div>
+          <label className="font-medium text-gray-700">Contact Number</label>
+          <input
+            type="tel"
+            name="contact"
+            value={input.contact}
+            onChange={handlechange}
+            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
+              error.contact ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {error.contact && <p className="text-red-600 text-sm">{error.contact}</p>}
+        </div>
 
-          {/* Submit */}
-          <div className="pt-4">
-            <button
-              type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Register
-            </button>
-          </div>
-        </form>
-      </div>
+        {/* Submit */}
+        <div className="col-span-1 md:col-span-2">
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition"
+          >
+            {editUser ? "Update Student" : "Register Student"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
