@@ -1,47 +1,85 @@
-const Studentinfotable = ({ studentData, getEditUser, deleteuser }) => {
-  return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-100">
-          <tr>
-            {["Name", "Email", "Gender", "Password", "Course", "Contact", "Action"].map(
-              (h) => (
-                <th key={h} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                  {h}
-                </th>
-              )
+const UserList = ({ users, deleteUser, getEditUser }) => {
+    const handleDelete = (userId) => {
+        deleteUser(userId);
+    };
+
+    const handleEdit = (user) => {
+        getEditUser(user);
+    };
+
+    const getCourse = (course) => {
+        switch (course) {
+            case 1:
+                return "Full Stack Development";
+            case 2:
+                return "UI/UX";
+            case 3:
+                return "AI/ML/DS";
+            default:
+                return "Unknown Course";
+        }
+    };
+
+    return (
+        <div>
+            {users.length !== 0 ? (
+                <div className="bg-slate-100 h-[459px]">
+                    <div className="container mx-auto h-full">
+                        <div className="h-full  sm:rounded-lg overflow-hidden">
+                            <div className="overflow-y-auto h-full scrollbar-hidden">
+                                <table className="w-full text-sm text-left text-gray-500">
+                                    <thead className="text-white uppercase bg-gray-950 sticky top-0 z-10">
+                                        <tr>
+                                            <th className="px-6 py-3">Name</th>
+                                            <th className="px-6 py-3">Course</th>
+                                            <th className="px-6 py-3">Email</th>
+                                            <th className="px-6 py-3">Gender</th>
+                                            <th className="px-6 py-3">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.map((item) => (
+                                            <tr
+                                                key={item.id}
+                                                className="odd:bg-white even:bg-gray-50  border-gray-200"
+                                            >
+                                                <td className="px-6 py-3 text-black">{item.name}</td>
+                                                <td className="px-6 py-3 text-black">
+                                                    {getCourse(Number(item.course))}
+                                                </td>
+                                                <td className="px-6 py-3 text-black">{item.email}</td>
+                                                <td className="px-6 py-3 text-black">{item.gender}</td>
+                                                <td className="px-6 py-3 text-black">
+                                                    <div className="flex gap-5">
+                                                        <button
+                                                            className="font-medium text-blue-600 hover:underline"
+                                                            onClick={() => handleEdit(item)}
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button
+                                                            className="font-medium text-red-600 hover:underline"
+                                                            onClick={() => handleDelete(item.id)}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <h1 className="bg-slate-100 h-[459px] text-center text-xl font-semibold pt-10">
+                    No Data Found
+                </h1>
             )}
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {studentData.map((s) => (
-            <tr key={s.id}>
-              <td className="px-6 py-4">{s.fname}</td>
-              <td className="px-6 py-4">{s.email}</td>
-              <td className="px-6 py-4">{s.gender}</td>
-              <td className="px-6 py-4">{s.password}</td>
-              <td className="px-6 py-4">{s.course}</td>
-              <td className="px-6 py-4">{s.contact}</td>
-              <td className="px-6 py-4 space-x-4">
-                <button
-                  onClick={() => getEditUser(s)}
-                  className="text-indigo-600 hover:underline"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => deleteuser(s)}
-                  className="text-red-600 hover:underline"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+        </div>
+    );
 };
 
-export default Studentinfotable;
+export default UserList;

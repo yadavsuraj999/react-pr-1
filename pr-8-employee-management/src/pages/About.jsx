@@ -149,7 +149,7 @@ const About = () => {
               {
                 icon: (
                   <svg
-                    className="w-10 h-10 text-blue-400"
+                    className="w-10 h-10 text-blue-400 bg-gray-700 rounded-full"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -168,7 +168,7 @@ const About = () => {
               {
                 icon: (
                   <svg
-                    className="w-10 h-10 text-indigo-400"
+                    className="w-10 h-10 text-indigo-400 bg-gray-700 rounded-full"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -187,7 +187,7 @@ const About = () => {
               {
                 icon: (
                   <svg
-                    className="w-10 h-10 text-purple-400"
+                    className="w-10 h-10 text-purple-400 bg-gray-700 rounded-full"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

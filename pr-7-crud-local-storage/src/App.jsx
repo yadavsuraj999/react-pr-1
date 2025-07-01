@@ -3,47 +3,58 @@ import Form from "./components/Form";
 import Studentinfotable from "./components/Studentinfotable";
 
 const App = () => {
-  const [userdata, setUserData] = useState([]);
-  const [edituser, setEditUser] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [editedUser, setEditedUser] = useState(null)
 
-  // Load data on mount
-  useEffect(() => {
-    const existing = JSON.parse(localStorage.getItem("studentData")) || [];
-    setUserData(existing);
-  }, []);
+    useEffect(() => {
+        const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+        setUsers(savedUsers);
+    }, []);
 
-  // Persist data
-  useEffect(() => {
-    localStorage.setItem("studentData", JSON.stringify(userdata));
-  }, [userdata]);
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(users))
+    }, [users])
 
-  const addStudent = (studentData) => {
-    if (edituser) {
-      setUserData((prev) =>
-        prev.map((u) => (u.id === studentData.id ? studentData : u))
-      );
-      setEditUser(null);
-    } else {
-      setUserData((prev) => [...prev, { ...studentData, id: Date.now() }]);
+    const addUser = (user) => {
+        if (editedUser) {
+            UpdateUser(user); 
+        } else {
+            setUsers([...users, user]);
+        }
+    };
+
+
+    const deleteUser = (userId) => {
+        let newUsers = users.filter((user) => {
+            return user.id !== userId
+        })
+        setUsers(newUsers)
+        if (userId == editedUser.id) {
+            setEditedUser(null)
+        }
     }
-  };
 
-  const deleteUser = (student) => {
-    setUserData((prev) => prev.filter((u) => u.id !== student.id));
-  };
+    const getEditUser = (user) => {
+        setEditedUser(user)
+    }
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8">
-      <div className="w-full max-w-4xl">
-        <Form addStudent={addStudent} editUser={edituser} />
-        <Studentinfotable
-          studentData={userdata}
-          getEditUser={setEditUser}
-          deleteuser={deleteUser}
-        />
-      </div>
-    </div>
-  );
+    const UpdateUser = (updatedUser) => {
+        const updatedList = users.map((user) =>
+            user.id === updatedUser.id ? updatedUser : user
+        );
+        setUsers(updatedList);
+        setEditedUser(null);
+    };
+
+
+    console.log(users);
+
+    return (
+        <div>
+            <Form addUser={addUser} editedUser={editedUser} />
+            <Studentinfotable users={users} deleteUser={deleteUser} getEditUser={getEditUser} UpdateUser={UpdateUser}  />
+        </div>
+    );
 };
 
 export default App;

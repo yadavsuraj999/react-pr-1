@@ -1,187 +1,302 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
-const Form = ({ addStudent, editUser }) => {
-  const initial = {
-    fname: "",
+const Form = ({ addUser, editedUser }) => {
+  const [text, setText] = useState({
+    name: "",
     email: "",
-    password: "",
-    confirmpassword: "",
     course: "",
-    contact: "",
-    gender: "",
+    password: "",
+    confirmPassword: "",
+    gender: ""
+  });
+
+  const [error, setError] = useState({});
+
+  useEffect(() => {
+    if (editedUser) {
+      setError({});
+      setText(editedUser);
+    } else {
+      setText({
+        name: "",
+        email: "",
+        course: "",
+        password: "",
+        confirmPassword: "",
+        gender: ""
+      });
+    }
+  }, [editedUser]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let tempObj = {};
+
+    if (!text.name.trim()) {
+      tempObj.name = "Please enter your name";
+    }
+
+    if (text.course === "" || text.course == null) {
+      tempObj.course = "Please select a course";
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!text.email.trim() || !emailRegex.test(text.email)) {
+      tempObj.email = "Please enter a valid email";
+    }
+
+    if (text.gender === "" || text.gender == null) {
+      tempObj.gender = "Please select your gender";
+    }
+
+    if (!text.password.trim()) {
+      tempObj.password = "Please enter a password";
+    } else if (text.password.length < 8) {
+      tempObj.password = "Password must be at least 8 characters";
+    }
+
+    if (text.confirmPassword !== text.password) {
+      tempObj.confirmPassword = "Passwords do not match";
+    }
+
+    setError(tempObj);
+
+    if (Object.keys(tempObj).length > 0) {
+      return;
+    }
+
+    if (editedUser) {
+      addUser(text);
+      if (
+        text.name !== editedUser.name ||
+        text.email !== editedUser.email ||
+        text.course !== editedUser.course ||
+        text.gender !== editedUser.gender ||
+        text.password !== editedUser.password ||
+        text.confirmPassword !== editedUser.confirmPassword
+      ) {
+        toast.warn("User Updated Successfully");
+      } else {
+        toast.error("Please Update The User");
+      }
+    } else {
+      const updatedUsers = { ...text, id: Date.now() };
+      addUser(updatedUsers);
+      toast.success("User Added Successfully");
+    }
+
+    setText({
+      name: "",
+      email: "",
+      course: "",
+      password: "",
+      confirmPassword: "",
+      gender: ""
+    });
   };
 
-  const [input, setInput] = useState(initial);
-  const [error, setError] = useState({});
-  const formRef = useRef(null);
-
-  // Prefill when editing
-  useEffect(() => {
-    if (editUser) {
-      setInput({ ...editUser, confirmpassword: editUser.password });
-      formRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [editUser]);
-
-  const handlechange = (e) =>
-    setInput((i) => ({ ...i, [e.target.name]: e.target.value }));
-
-  const handlesubmit = (e) => {
-    e.preventDefault();
-    const errs = {};
-
-    if (!input.fname.trim()) errs.fname = "Full name is required.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email))
-      errs.email = "A valid email is required.";
-    if (input.password.length < 8)
-      errs.password = "Password must be at least 8 characters.";
-    if (input.password !== input.confirmpassword)
-      errs.confirmpassword = "Passwords must match.";
-    if (!input.gender) errs.gender = "Please select your gender.";
-    if (!["uiux", "fullstack", "graphic"].includes(input.course))
-      errs.course = "Please select a course.";
-    if (!/^\d{10}$/.test(input.contact))
-      errs.contact = "Contact must be a 10‑digit number.";
-
-    setError(errs);
-    if (Object.keys(errs).length) return;
-
-    addStudent(input);
-    setInput(initial);
+  const handleChange = (e) => {
+    const key = e.target.name || e.target.id;
+    setText({ ...text, [key]: e.target.value });
+    setError({ ...error, [key]: "" });
   };
 
   return (
-    <div ref={formRef} className="bg-white shadow-md rounded-lg p-8 mb-8 ">
-      <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
-        {editUser ? "Edit Student" : "Register New Student"}
-      </h2>
-      <form onSubmit={handlesubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Full Name */}
-        <div className="col-span-1 md:col-span-2">
-          <label className="font-medium text-gray-700">Full Name</label>
-          <input
-            name="fname"
-            value={input.fname}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.fname ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error.fname && <p className="text-red-600 text-sm mt-1">{error.fname}</p>}
-        </div>
+    <div className="bg-slate-100 py-10">
+      <div className="container mx-auto px-4 flex items-center justify-center">
+        <div className="w-full max-w-4xl">
+          <form
+            className="bg-white p-8 rounded-xl shadow-2xl w-full"
+            onSubmit={handleSubmit}
+          >
+            <h2
+              className={`text-2xl font-bold text-center mb-6 ${
+                editedUser ? "text-green-600" : "text-neutral-950"
+              }`}
+            >
+              Student Management System
+            </h2>
 
-        {/* Gender */}
-        <div>
-          <label className="font-medium text-gray-700">Gender</label>
-          <div className="mt-1 flex gap-4">
-            {["male", "female", "other"].map((g) => (
-              <label key={g} className="inline-flex items-center">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="mb-5">
+                <label
+                  htmlFor="name"
+                  className={`block font-semibold text-md ${
+                    error.name ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Name
+                </label>
                 <input
-                  type="radio"
-                  name="gender"
-                  value={g}
-                  checked={input.gender === g}
-                  onChange={handlechange}
-                  className="h-4 w-4 text-indigo-600"
+                  onChange={handleChange}
+                  value={text.name}
+                  type="text"
+                  id="name"
+                  className={`w-full border-2 outline-none p-2 ${
+                    error.name ? "border-red-500" : "border-gray-300"
+                  }`}
                 />
-                <span className="ml-2 capitalize text-gray-700">{g}</span>
-              </label>
-            ))}
-          </div>
-          {error.gender && <p className="text-red-600 text-sm">{error.gender}</p>}
-        </div>
+                {error.name && (
+                  <p className="text-red-600 text-sm mt-1">{error.name}</p>
+                )}
+              </div>
 
-        {/* Email */}
-        <div>
-          <label className="font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={input.email}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.email ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error.email && <p className="text-red-600 text-sm">{error.email}</p>}
-        </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="course"
+                  className={`block font-semibold text-md ${
+                    error.course ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Course
+                </label>
+                <select
+                  onChange={handleChange}
+                  value={text.course}
+                  id="course"
+                  className={`w-full border-2 outline-none p-2 ${
+                    error.course ? "border-red-500" : "border-gray-300"
+                  }`}
+                >
+                  <option value="">--Select Course--</option>
+                  <option value="1">Full Stack Development</option>
+                  <option value="2">UI/UX</option>
+                  <option value="3">AI/ML/DS</option>
+                </select>
+                {error.course && (
+                  <p className="text-red-600 text-sm mt-1">{error.course}</p>
+                )}
+              </div>
+            </div>
 
-        {/* Password */}
-        <div>
-          <label className="font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={input.password}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.password ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error.password && <p className="text-red-600 text-sm">{error.password}</p>}
-        </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="mb-5">
+                <label
+                  htmlFor="email"
+                  className={`block font-semibold text-md ${
+                    error.email ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Email
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={text.email}
+                  type="text"
+                  id="email"
+                  className={`w-full border-2 outline-none p-2 ${
+                    error.email ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {error.email && (
+                  <p className="text-red-600 text-sm mt-1">{error.email}</p>
+                )}
+              </div>
 
-        {/* Confirm Password */}
-        <div>
-          <label className="font-medium text-gray-700">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmpassword"
-            value={input.confirmpassword}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.confirmpassword ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error.confirmpassword && (
-            <p className="text-red-600 text-sm">{error.confirmpassword}</p>
-          )}
-        </div>
+              <div className="mb-5">
+                <label
+                  className={`block font-semibold text-md ${
+                    error.gender ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Gender
+                </label>
+                <div className="flex items-center gap-4 mt-2">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      value="Male"
+                      onChange={handleChange}
+                      checked={text.gender === "Male"}
+                      className="mr-2 w-4 h-4"
+                      name="gender"
+                    />
+                    Male
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      value="Female"
+                      onChange={handleChange}
+                      checked={text.gender === "Female"}
+                      className="mr-2 w-4 h-4"
+                      name="gender"
+                    />
+                    Female
+                  </label>
+                </div>
+                {error.gender && (
+                  <p className="text-red-600 text-sm mt-1">{error.gender}</p>
+                )}
+              </div>
+            </div>
 
-        {/* Course */}
-        <div>
-          <label className="font-medium text-gray-700">Course</label>
-          <select
-            name="course"
-            value={input.course}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.course ? "border-red-500" : "border-gray-300"
-            }`}
-          >
-            <option value="">Select a course...</option>
-            <option value="uiux">UI/UX Designer</option>
-            <option value="fullstack">Full Stack Developer</option>
-            <option value="graphic">Graphic Designer</option>
-          </select>
-          {error.course && <p className="text-red-600 text-sm">{error.course}</p>}
-        </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="mb-5">
+                <label
+                  htmlFor="password"
+                  className={`block font-semibold text-md ${
+                    error.password ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Password
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={text.password}
+                  type="password"
+                  id="password"
+                  className={`w-full border-2 outline-none p-2 ${
+                    error.password ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {error.password && (
+                  <p className="text-red-600 text-sm mt-1">{error.password}</p>
+                )}
+              </div>
 
-        {/* Contact */}
-        <div>
-          <label className="font-medium text-gray-700">Contact Number</label>
-          <input
-            type="tel"
-            name="contact"
-            value={input.contact}
-            onChange={handlechange}
-            className={`mt-1 block w-full border px-4 py-2 rounded-md ${
-              error.contact ? "border-red-500" : "border-gray-300"
-            }`}
-          />
-          {error.contact && <p className="text-red-600 text-sm">{error.contact}</p>}
-        </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="confirmPassword"
+                  className={`block font-semibold text-md ${
+                    error.confirmPassword ? "text-red-600" : "text-gray-950"
+                  }`}
+                >
+                  Confirm Password
+                </label>
+                <input
+                  onChange={handleChange}
+                  value={text.confirmPassword}
+                  type="password"
+                  id="confirmPassword"
+                  className={`w-full border-2 outline-none p-2 ${
+                    error.confirmPassword ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+                {error.confirmPassword && (
+                  <p className="text-red-600 text-sm mt-1">
+                    {error.confirmPassword}
+                  </p>
+                )}
+              </div>
+            </div>
 
-        {/* Submit */}
-        <div className="col-span-1 md:col-span-2">
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition"
-          >
-            {editUser ? "Update Student" : "Register Student"}
-          </button>
+            <button
+              type="submit"
+              className={`w-full text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ${
+                editedUser
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-neutral-800 hover:bg-neutral-950"
+              }`}
+            >
+              {editedUser ? "Update" : "Submit"}
+            </button>
+          </form>
         </div>
-      </form>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
